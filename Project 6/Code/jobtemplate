@@ -1,0 +1,21 @@
+#!/bin/sh
+# Name of job
+#PBS -N $NAME
+# Account to run job
+#PBS -A freecycle
+# Max walltime
+#PBS -l walltime=00:$MIN:$SEK
+# Queue to submit to:
+#PBS -q optimist
+# Resources to be reserved for the job:
+#PBS -lnodes=$LNODES:ppn=$PPN:amd
+# Contact mail:
+#PBS -M emily.siggerud@gmail.com
+cd $WORKDIR
+# Load needed modules
+module load intelcomp
+module load openmpi/1.4.3-intel
+module load intel/compilers/11.1.059
+# Set thread affinity
+KMP_AFFINITY="granularity=fine,compact"
+OMP_NUM_THREADS=$OMP mpirun -npernode $MPIPN -loadbalance ./paral_possion $SIZE

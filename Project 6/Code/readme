@@ -1,0 +1,30 @@
+Files used in this project:
+
+CMakeLists.txt:
+
+    Used by CMake to set up make files for compiling.
+    CMake must be called using these commands:
+    
+    $ module load intel/compilers/11.1.059
+    $ module load cmake
+    $ CC=icc FC=ifort cmake . -DCMAKE_BUILD_TYPE=Release
+
+
+makejobs.py:
+
+    Generates and queues jobs from a matrix of job settings.
+    
+    
+jobtemplate:
+
+    A template for a *.sh file that can be queued by qsub.
+    Used by makejobs.py to generate jobscripts.
+    
+    
+paral_poisson.c:
+
+    A parallelized implementation of the poisson solver in C. 
+    Uses both MPI and openMP. Distribution between these two
+    is decided in the jobscript. No output by default. Takes
+    one input parameter, which is the system size n. n must be
+    on the form n = 2^k.
